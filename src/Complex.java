@@ -1,5 +1,8 @@
+/**
+ * Class of complex numbers
+ */
 public class Complex {
-    double real, imagin;
+    private double real, imagin;
 
     public Complex() {
         this(0.0, 0.0);
