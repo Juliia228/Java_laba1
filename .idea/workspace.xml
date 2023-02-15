@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ea5f03d-149c-4b5e-8df7-7de6096da937" name="Changes" comment=".gitignore updated">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="9ea5f03d-149c-4b5e-8df7-7de6096da937" name="Changes" comment="realized the creation of a complex number">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Complex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Complex.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/InputOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InputOutput.java" afterDir="false" />
@@ -101,7 +101,7 @@
       <updated>1676419130526</updated>
       <workItem from="1676419131721" duration="2098000" />
       <workItem from="1676457372969" duration="1886000" />
-      <workItem from="1676487568433" duration="360000" />
+      <workItem from="1676487568433" duration="15389000" />
     </task>
     <task id="LOCAL-00001" summary="Created repository">
       <created>1676419419099</created>
@@ -131,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676420051149</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="realized the creation of a complex number">
+      <created>1676488260050</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1676488260050</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -141,6 +148,7 @@
     <MESSAGE value="Created repository" />
     <MESSAGE value="Base code" />
     <MESSAGE value=".gitignore updated" />
-    <option name="LAST_COMMIT_MESSAGE" value=".gitignore updated" />
+    <MESSAGE value="realized the creation of a complex number" />
+    <option name="LAST_COMMIT_MESSAGE" value="realized the creation of a complex number" />
   </component>
 </project>
