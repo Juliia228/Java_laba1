@@ -11,6 +11,7 @@ public class InputOutput {
      */
     public static Complex InputAndCreateComplex(){
         String parts = sc.next();
+        //
         double real = Double.parseDouble(parts.substring(0, parts.indexOf(',')));
         double imagin = Double.parseDouble(parts.substring(parts.indexOf(',') + 1));
         return new Complex(real, imagin);
@@ -64,8 +65,6 @@ public class InputOutput {
         if (!IsBreak){
             try {
                 new_matrix = new Matrix(m, n);
-                new_matrix.SetCountOfRows(m);
-                new_matrix.SetCountOfColumns(n);
             } catch (Exception e){
                 System.out.println("Error");
             }
@@ -99,16 +98,29 @@ public class InputOutput {
                 } else{
                     PrintComplex(row[j]);
                     System.out.print("  ");
+                    //
                 }
             }
             System.out.println("");
         }
     }
+    public static void PrintTranspMatrix(Matrix matrix, int n, int m){
+        Complex[][] matrix_elem = matrix.GetMatrix();
+        Matrix t_matrix = new Matrix(m, n);
+        Complex[][] transp_matrix = t_matrix.GetMatrix();
+        for (int i = 0; i < m; i++){
+            for (int j = 0; j < n; j++){
+                transp_matrix[i][j] = matrix_elem[j][i];
+            }
+        }
+        System.out.print("Transposed ");
+        PrintMatrix(transp_matrix, n);
+    }
     /**
      *Method to work with user commands
      */
     public static boolean Functions() {
-        int func = 0;
+        int func;
         try {
             func = sc.nextInt();
         } catch (java.util.InputMismatchException e){
@@ -120,10 +132,15 @@ public class InputOutput {
         Complex complex2 = new Complex();
         Complex result;
         Matrix new_matrix;
+        Complex[][] matrix_result;
+        Matrix matrix1;
+        Matrix matrix2;
+        Complex[][] matrix1_elem;
+        Complex[][] matrix2_elem;
         boolean IsBreak; // false - program works, true - program is broken
         switch (func){
             case 1:
-                System.out.println("1 - print this menu;\n2 - create a complex number;\n3 - add two complex numbers;\n4 - subtract the second complex number from the first complex number;\n5 - multiply two complex numbers;\n6 - print a complex number in trigonometric form;\n7 - create a matrix;\n8 - set matrix elements;\n9 - add two matrices;\n10 - multiply two matrices;\n11 - matrix transposition;\n12 - calculate the determinant of the matrix;\n13 - finish the program");
+                System.out.println("1 - print this menu;\n2 - create a complex number;\n3 - add two complex numbers;\n4 - subtract the second complex number from the first complex number;\n5 - multiply two complex numbers;\n6 - print a complex number in trigonometric form;\n7 - create a matrix;\n8 - set matrix elements;\n9 - add two matrices;\n10 - multiply two matrices;\n11 - matrix transposition;\n12 - finish the program");
                 break;
             case 2:
                 try {
@@ -220,22 +237,50 @@ public class InputOutput {
                 System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 9:
-                //
+                System.out.print("Enter the first matrix:\nEnter the sizes of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
+                matrix1 = CreateMatrix();
+                matrix1_elem = FillMatrix(matrix1);
+                System.out.print("Enter the second matrix:\nEnter the sizes of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
+                matrix2 = CreateMatrix();
+                matrix2_elem = FillMatrix(matrix2);
+                if (matrix1.GetCountOfRows() == matrix2.GetCountOfRows() && matrix1.GetCountOfColumns() == matrix2.GetCountOfColumns()){
+                    matrix_result = Matrix.AddMatrices(matrix1_elem, matrix2_elem, matrix1.GetCountOfRows(), matrix1.GetCountOfColumns());
+                    new_matrix = new Matrix(matrix_result);
+                    matrix_result = new_matrix.GetMatrix();
+                    PrintMatrix(matrix_result, new_matrix.GetCountOfColumns());
+                } else {
+                    System.out.println("Addition is impossible");
+                }
                 System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 10:
-                //
+                System.out.print("Enter the first matrix:\nEnter the sizes of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
+                matrix1 = CreateMatrix();
+                matrix1_elem = FillMatrix(matrix1);
+                System.out.print("Enter the second matrix:\nEnter the sizes of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
+                matrix2 = CreateMatrix();
+                matrix2_elem = FillMatrix(matrix2);
+                int m = matrix2.GetCountOfRows();
+                int n = matrix1.GetCountOfColumns();
+                if (m == n){
+                    matrix_result = Matrix.MultiplyMatrices(matrix1_elem, matrix2_elem, m, n);
+                    new_matrix = new Matrix(matrix_result);
+                    matrix_result = new_matrix.GetMatrix();
+                    PrintMatrix(matrix_result, n);
+                } else {
+                    System.out.println("Multiplication  is impossible");
+                }
                 System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 11:
-                //
+                System.out.print("Enter the sizes of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
+                new_matrix = CreateMatrix();
+                Complex[][] matrix_elem = FillMatrix(new_matrix);
+                PrintMatrix(matrix_elem, new_matrix.GetCountOfColumns());
+                PrintTranspMatrix(new_matrix, new_matrix.GetCountOfRows(), new_matrix.GetCountOfColumns());
                 System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 12:
-                //
-                System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
-                break;
-            case 13:
                 return false;
             default:
                 System.out.println("Non-existent command\nEnter the right number of the function you want to do. Enter 1 to view the list of functions");
