@@ -35,6 +35,11 @@ public class InputOutput {
         double phi = Math.atan2(b, a);
         System.out.format("%.3f*(cos(%.3f)+sin(%.3f))\n", r, phi, phi);
     }
+
+    /**
+     * Method to create new object of the Matrix class
+     * @return new object of the Matrix class
+     */
     public static Matrix CreateMatrix(){
         int m = 0;
         int n = 0;
@@ -44,12 +49,12 @@ public class InputOutput {
             m = sc.nextInt();
             n = sc.nextInt();
         } catch (java.util.InputMismatchException e){
-            System.out.println("You can set the sizes only by numbers");
+            System.out.println("You can set the dimensions only by numbers");
             sc = new Scanner(System.in);
             IsBreak = true;
         }
         if (m <= 0 || n <= 0 || IsBreak){
-            System.out.println("Wrong sizes");
+            System.out.println("Wrong dimensions");
             IsBreak = true;
         }
         if (!IsBreak){
@@ -61,6 +66,12 @@ public class InputOutput {
         }
         return new_matrix;
     }
+
+    /**
+     * Method to get matrix elements from the user and fill the matrix with these elements
+     * @param matrix - matrix array to be filled in
+     * @return filled matrix array
+     */
     public static Complex[][] FillMatrix(Matrix matrix){
         Complex[][] matrix_elem = matrix.GetMatrix();
         int m = matrix.GetCountOfRows();
@@ -86,6 +97,13 @@ public class InputOutput {
         }
         return matrix_elem;
     }
+
+    /**
+     * Method to print matrix
+     * @param matrix - matrix to be printed
+     * @param m - count of rows of the matrix
+     * @param n - count of columns of the matrix
+     */
     public static void PrintMatrix(Complex[][] matrix, int m, int n){
         System.out.println("Matrix:");
         for (int i = 0; i < m; i++){
@@ -101,6 +119,13 @@ public class InputOutput {
             System.out.println("");
         }
     }
+
+    /**
+     * Method to transpose matrix and print transposed matrix
+     * @param matrix - matrix to be transposed and printed
+     * @param m - count of rows of transposed matrix
+     * @param n - count of columns of transposed matrix
+     */
     public static void PrintTranspMatrix(Matrix matrix, int m, int n){
         Complex[][] matrix_elem = matrix.GetMatrix();
         Matrix t_matrix = new Matrix(m, n);
@@ -113,6 +138,13 @@ public class InputOutput {
         System.out.print("Transposed ");
         PrintMatrix(transp_matrix, m, n);
     }
+
+    /**
+     * Helper method for beautiful matrix output
+     * @param matrix - matrix to be printed
+     * @param i - index of current loop element is outside the method
+     * @param j - index of current loop element is outside the method
+     */
     public static void PrintSpaces(Complex[][] matrix, int i, int j){
         int MaxLen = MaxLenOfNumber(matrix, j);
         double real = matrix[i][j].GetReal();
@@ -123,22 +155,31 @@ public class InputOutput {
             System.out.print(" ");
         }
     }
+
+    /**
+     * Helper method for beautiful matrix output
+     * @param matrix - matrix to be printed
+     * @param j - index of current loop element is outside the method
+     * @return the largest length of number in the current column of the matrix
+     */
     public static int MaxLenOfNumber(Complex[][] matrix, int j){
         int m = matrix.length;
         int MaxLen = 0;
         double real, imagin;
-        for (int i = 0; i < m; i++){
-            real = matrix[i][j].GetReal();
-            imagin = matrix[i][j].GetImagin();
-            String str = real+"+"+imagin+"i";
-            if (str.length() > MaxLen){
+        for (Complex[] row : matrix) {
+            real = row[j].GetReal();
+            imagin = row[j].GetImagin();
+            String str = real + "+" + imagin + "i";
+            if (str.length() > MaxLen) {
                 MaxLen = str.length();
             }
         }
         return MaxLen;
     }
+
     /**
-     *Method to work with user commands
+     * Method to work with user commands
+     * @return true - the program continues to work, false - finish the program
      */
     public static boolean Functions() {
         int func;
@@ -244,7 +285,7 @@ public class InputOutput {
                 System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 7:
-                System.out.print("Enter the sizes of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
+                System.out.print("Enter the dimensions of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
                 new_matrix = CreateMatrix();
                 if (new_matrix.GetCountOfRows() > 0 && new_matrix.GetCountOfColumns() > 0) {
                     System.out.println("Matrix created");
@@ -253,17 +294,17 @@ public class InputOutput {
                 System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 8:
-                System.out.print("Enter the sizes of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
+                System.out.print("Enter the dimensions of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
                 new_matrix = CreateMatrix();
                 Complex[][] matrix_elements = FillMatrix(new_matrix);
                 PrintMatrix(matrix_elements, new_matrix.GetCountOfRows(), new_matrix.GetCountOfColumns());
                 System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 9:
-                System.out.print("Enter the first matrix:\nEnter the sizes of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
+                System.out.print("Enter the first matrix:\nEnter the dimensions of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
                 matrix1 = CreateMatrix();
                 matrix1_elem = FillMatrix(matrix1);
-                System.out.print("Enter the second matrix:\nEnter the sizes of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
+                System.out.print("\nEnter the second matrix:\nEnter the dimensions of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
                 matrix2 = CreateMatrix();
                 matrix2_elem = FillMatrix(matrix2);
                 if (matrix1.GetCountOfRows() == matrix2.GetCountOfRows() && matrix1.GetCountOfColumns() == matrix2.GetCountOfColumns()){
@@ -277,10 +318,10 @@ public class InputOutput {
                 System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 10:
-                System.out.print("Enter the first matrix:\nEnter the sizes of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
+                System.out.print("Enter the first matrix:\nEnter the dimensions of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
                 matrix1 = CreateMatrix();
                 matrix1_elem = FillMatrix(matrix1);
-                System.out.print("Enter the second matrix:\nEnter the sizes of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
+                System.out.print("\nEnter the second matrix:\nEnter the dimensions of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
                 matrix2 = CreateMatrix();
                 matrix2_elem = FillMatrix(matrix2);
                 int m = matrix2.GetCountOfRows();
@@ -296,7 +337,7 @@ public class InputOutput {
                 System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 11:
-                System.out.print("Enter the sizes of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
+                System.out.print("Enter the dimensions of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
                 new_matrix = CreateMatrix();
                 Complex[][] matrix_elem = FillMatrix(new_matrix);
                 PrintMatrix(matrix_elem, new_matrix.GetCountOfRows(), new_matrix.GetCountOfColumns());

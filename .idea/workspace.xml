@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ea5f03d-149c-4b5e-8df7-7de6096da937" name="Changes" comment="Fixed matrix multiplication">
+    <list default="true" id="9ea5f03d-149c-4b5e-8df7-7de6096da937" name="Changes" comment="Edits for a more beautiful output">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/InputOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InputOutput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Matrix.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +100,7 @@
       <workItem from="1676457372969" duration="1886000" />
       <workItem from="1676487568433" duration="19879000" />
       <workItem from="1676555010781" duration="3850000" />
-      <workItem from="1676569727820" duration="16834000" />
+      <workItem from="1676569727820" duration="19695000" />
     </task>
     <task id="LOCAL-00001" summary="Created repository">
       <created>1676419419099</created>
@@ -164,7 +165,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676581401345</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Edits for a more beautiful output">
+      <created>1676587001931</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1676587001931</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,6 +187,7 @@
     <MESSAGE value="Added creation and filling for matrix" />
     <MESSAGE value="Added functions for working with matrices" />
     <MESSAGE value="Fixed matrix multiplication" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed matrix multiplication" />
+    <MESSAGE value="Edits for a more beautiful output" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edits for a more beautiful output" />
   </component>
 </project>
