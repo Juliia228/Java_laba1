@@ -9,7 +9,7 @@ public class Main {
             try {
                 run = InputOutput.Functions();
             } catch (Exception e){
-                System.out.println("Wrong command");
+                System.out.println("Wrong command\n\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
             }
         }
     }

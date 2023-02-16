@@ -49,12 +49,14 @@ public class Matrix {
         }
         return result;
     }
-    public static Complex[][] MultiplyMatrices(Complex[][] matrix1, Complex[][] matrix2, int m, int n){
+    public static Complex[][] MultiplyMatrices(Complex[][] matrix1, Complex[][] matrix2, int m, int n, int l){
         Complex[][] result = new Complex[m][n];
-        for (int i = 0; i < m; ++i){
-            for (int j = 0; j < n; ++j){
-                for (int k = 0; k < m; ++k){
-                    result[i][j] = Complex.Multiply(matrix1[i][k], matrix2[k][j]);
+        for (int i = 0; i < m; i++){
+            for (int j = 0; j < n; j++){
+                Complex summa = new Complex();
+                for (int k = 0; k < l; k++){
+                    summa = Complex.Add(summa, Complex.Multiply(matrix1[i][k], matrix2[k][j]));
+                    result[i][j] = summa;
                 }
             }
         }

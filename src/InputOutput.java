@@ -263,10 +263,10 @@ public class InputOutput {
                 int m = matrix2.GetCountOfRows();
                 int n = matrix1.GetCountOfColumns();
                 if (m == n){
-                    matrix_result = Matrix.MultiplyMatrices(matrix1_elem, matrix2_elem, m, n);
+                    matrix_result = Matrix.MultiplyMatrices(matrix1_elem, matrix2_elem, matrix1.GetCountOfRows(), matrix2.GetCountOfColumns(), n);
                     new_matrix = new Matrix(matrix_result);
                     matrix_result = new_matrix.GetMatrix();
-                    PrintMatrix(matrix_result, n);
+                    PrintMatrix(matrix_result, matrix2.GetCountOfColumns());
                 } else {
                     System.out.println("Multiplication  is impossible");
                 }

@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ea5f03d-149c-4b5e-8df7-7de6096da937" name="Changes" comment="Added creation and filling for matrix">
+    <list default="true" id="9ea5f03d-149c-4b5e-8df7-7de6096da937" name="Changes" comment="Added functions for working with matrices">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/InputOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InputOutput.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
@@ -101,7 +102,7 @@
       <workItem from="1676457372969" duration="1886000" />
       <workItem from="1676487568433" duration="19879000" />
       <workItem from="1676555010781" duration="3850000" />
-      <workItem from="1676569727820" duration="8383000" />
+      <workItem from="1676569727820" duration="11531000" />
     </task>
     <task id="LOCAL-00001" summary="Created repository">
       <created>1676419419099</created>
@@ -152,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676572991332</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added functions for working with matrices">
+      <created>1676578427459</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1676578427459</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,6 +173,7 @@
     <MESSAGE value="realized the creation of a complex number" />
     <MESSAGE value="Added functions for working with complex numbers" />
     <MESSAGE value="Added creation and filling for matrix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added creation and filling for matrix" />
+    <MESSAGE value="Added functions for working with matrices" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added functions for working with matrices" />
   </component>
 </project>
