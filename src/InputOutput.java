@@ -11,7 +11,6 @@ public class InputOutput {
      */
     public static Complex InputAndCreateComplex(){
         String parts = sc.next();
-        //
         double real = Double.parseDouble(parts.substring(0, parts.indexOf(',')));
         double imagin = Double.parseDouble(parts.substring(parts.indexOf(',') + 1));
         return new Complex(real, imagin);
@@ -24,15 +23,6 @@ public class InputOutput {
         double a = number.GetReal();
         double b = number.GetImagin();
         System.out.print(a+"+"+b+"i");
-//        double a = number.GetReal();
-//        double b = number.GetImagin();
-//        if (a == 0){
-//            System.out.println(b+"i");
-//        } else if (b == 0){
-//            System.out.println(a);
-//        } else{
-//            System.out.println(a+"+"+b+"i");
-//        }
     }
     /**
      * Method to print complex number in trigonometric form
@@ -43,7 +33,7 @@ public class InputOutput {
         double b = number.GetImagin();
         double r = Math.sqrt(a*a+b*b);
         double phi = Math.atan2(b, a);
-        System.out.println(r+"*(cos("+phi+")+sin("+phi+"))");
+        System.out.format("%.3f*(cos(%.3f)+sin(%.3f))\n", r, phi, phi);
     }
     public static Matrix CreateMatrix(){
         int m = 0;
@@ -58,7 +48,7 @@ public class InputOutput {
             sc = new Scanner(System.in);
             IsBreak = true;
         }
-        if (m < 0 || n < 0 || IsBreak){
+        if (m <= 0 || n <= 0 || IsBreak){
             System.out.println("Wrong sizes");
             IsBreak = true;
         }
@@ -83,28 +73,35 @@ public class InputOutput {
                     matrix_elem[i][j] = InputAndCreateComplex();
                 } catch (Exception e){
                     System.out.println("Invalid input. Try again");
-                    //
+                    if (i == 0 && j == 0){
+                        j--;
+                    } else if (j == 0){
+                        j = n - 1;
+                        i--;
+                    } else{
+                        j--;
+                    }
                 }
             }
         }
         return matrix_elem;
     }
-    public static void PrintMatrix(Complex[][] matrix, int n){
+    public static void PrintMatrix(Complex[][] matrix, int m, int n){
         System.out.println("Matrix:");
-        for (Complex[] row: matrix){
+        for (int i = 0; i < m; i++){
             for (int j = 0; j < n; j++){
-                if (row[j] == null){
+                if (matrix[i][j] == null){
                     System.out.print(0.0+"+"+0.0+"i  ");
                 } else{
-                    PrintComplex(row[j]);
+                    PrintComplex(matrix[i][j]);
+                    PrintSpaces(matrix, i, j);
                     System.out.print("  ");
-                    //
                 }
             }
             System.out.println("");
         }
     }
-    public static void PrintTranspMatrix(Matrix matrix, int n, int m){
+    public static void PrintTranspMatrix(Matrix matrix, int m, int n){
         Complex[][] matrix_elem = matrix.GetMatrix();
         Matrix t_matrix = new Matrix(m, n);
         Complex[][] transp_matrix = t_matrix.GetMatrix();
@@ -114,7 +111,31 @@ public class InputOutput {
             }
         }
         System.out.print("Transposed ");
-        PrintMatrix(transp_matrix, n);
+        PrintMatrix(transp_matrix, m, n);
+    }
+    public static void PrintSpaces(Complex[][] matrix, int i, int j){
+        int MaxLen = MaxLenOfNumber(matrix, j);
+        double real = matrix[i][j].GetReal();
+        double imagin = matrix[i][j].GetImagin();
+        String str = real+"+"+imagin+"i";
+        int CountOfSpaces = MaxLen - str.length();
+        for (int k = 0; k < CountOfSpaces; k++){
+            System.out.print(" ");
+        }
+    }
+    public static int MaxLenOfNumber(Complex[][] matrix, int j){
+        int m = matrix.length;
+        int MaxLen = 0;
+        double real, imagin;
+        for (int i = 0; i < m; i++){
+            real = matrix[i][j].GetReal();
+            imagin = matrix[i][j].GetImagin();
+            String str = real+"+"+imagin+"i";
+            if (str.length() > MaxLen){
+                MaxLen = str.length();
+            }
+        }
+        return MaxLen;
     }
     /**
      *Method to work with user commands
@@ -225,15 +246,17 @@ public class InputOutput {
             case 7:
                 System.out.print("Enter the sizes of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
                 new_matrix = CreateMatrix();
-                System.out.println("Matrix created");
-                PrintMatrix(new_matrix.GetMatrix(), new_matrix.GetCountOfColumns());
+                if (new_matrix.GetCountOfRows() > 0 && new_matrix.GetCountOfColumns() > 0) {
+                    System.out.println("Matrix created");
+                    PrintMatrix(new_matrix.GetMatrix(), new_matrix.GetCountOfRows(), new_matrix.GetCountOfColumns());
+                }
                 System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 8:
                 System.out.print("Enter the sizes of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
                 new_matrix = CreateMatrix();
                 Complex[][] matrix_elements = FillMatrix(new_matrix);
-                PrintMatrix(matrix_elements, new_matrix.GetCountOfColumns());
+                PrintMatrix(matrix_elements, new_matrix.GetCountOfRows(), new_matrix.GetCountOfColumns());
                 System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 9:
@@ -247,7 +270,7 @@ public class InputOutput {
                     matrix_result = Matrix.AddMatrices(matrix1_elem, matrix2_elem, matrix1.GetCountOfRows(), matrix1.GetCountOfColumns());
                     new_matrix = new Matrix(matrix_result);
                     matrix_result = new_matrix.GetMatrix();
-                    PrintMatrix(matrix_result, new_matrix.GetCountOfColumns());
+                    PrintMatrix(matrix_result, new_matrix.GetCountOfRows(), new_matrix.GetCountOfColumns());
                 } else {
                     System.out.println("Addition is impossible");
                 }
@@ -266,7 +289,7 @@ public class InputOutput {
                     matrix_result = Matrix.MultiplyMatrices(matrix1_elem, matrix2_elem, matrix1.GetCountOfRows(), matrix2.GetCountOfColumns(), n);
                     new_matrix = new Matrix(matrix_result);
                     matrix_result = new_matrix.GetMatrix();
-                    PrintMatrix(matrix_result, matrix2.GetCountOfColumns());
+                    PrintMatrix(matrix_result, matrix1.GetCountOfRows(), matrix2.GetCountOfColumns());
                 } else {
                     System.out.println("Multiplication  is impossible");
                 }
@@ -276,8 +299,8 @@ public class InputOutput {
                 System.out.print("Enter the sizes of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
                 new_matrix = CreateMatrix();
                 Complex[][] matrix_elem = FillMatrix(new_matrix);
-                PrintMatrix(matrix_elem, new_matrix.GetCountOfColumns());
-                PrintTranspMatrix(new_matrix, new_matrix.GetCountOfRows(), new_matrix.GetCountOfColumns());
+                PrintMatrix(matrix_elem, new_matrix.GetCountOfRows(), new_matrix.GetCountOfColumns());
+                PrintTranspMatrix(new_matrix, new_matrix.GetCountOfColumns(), new_matrix.GetCountOfRows());
                 System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 12:

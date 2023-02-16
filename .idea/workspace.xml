@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ea5f03d-149c-4b5e-8df7-7de6096da937" name="Changes" comment="Added functions for working with matrices">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="9ea5f03d-149c-4b5e-8df7-7de6096da937" name="Changes" comment="Fixed matrix multiplication">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/InputOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InputOutput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Matrix.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +99,7 @@
       <workItem from="1676457372969" duration="1886000" />
       <workItem from="1676487568433" duration="19879000" />
       <workItem from="1676555010781" duration="3850000" />
-      <workItem from="1676569727820" duration="11531000" />
+      <workItem from="1676569727820" duration="16834000" />
     </task>
     <task id="LOCAL-00001" summary="Created repository">
       <created>1676419419099</created>
@@ -160,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676578427459</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Fixed matrix multiplication">
+      <created>1676581401345</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1676581401345</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,6 +178,7 @@
     <MESSAGE value="Added functions for working with complex numbers" />
     <MESSAGE value="Added creation and filling for matrix" />
     <MESSAGE value="Added functions for working with matrices" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added functions for working with matrices" />
+    <MESSAGE value="Fixed matrix multiplication" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed matrix multiplication" />
   </component>
 </project>
