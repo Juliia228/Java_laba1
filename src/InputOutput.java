@@ -4,14 +4,12 @@ import java.util.Scanner;
  * @author Julia Komarova
  */
 public class InputOutput {
-    private static final Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
     /**
      * Method to get a complex number from user and create new object of the Complex class
      * @return new object of the Complex class
      */
     public static Complex InputAndCreateComplex(){
-        System.out.println("Enter first the real part of a complex number, then the imaginary part, separating them with a comma. If one of the parts is missing, write 0 instead.\nExample: 1.2,3.78");
-        System.out.print("Enter: ");
         String parts = sc.next();
         double real = Double.parseDouble(parts.substring(0, parts.indexOf(',')));
         double imagin = Double.parseDouble(parts.substring(parts.indexOf(',') + 1));
@@ -22,7 +20,18 @@ public class InputOutput {
      * @param number - complex number to be printed
      */
     public static void PrintComplex(Complex number){
-        System.out.println(number.GetReal()+"+"+number.GetImagin()+"i");
+        double a = number.GetReal();
+        double b = number.GetImagin();
+        System.out.print(a+"+"+b+"i");
+//        double a = number.GetReal();
+//        double b = number.GetImagin();
+//        if (a == 0){
+//            System.out.println(b+"i");
+//        } else if (b == 0){
+//            System.out.println(a);
+//        } else{
+//            System.out.println(a+"+"+b+"i");
+//        }
     }
     /**
      * Method to print complex number in trigonometric form
@@ -35,121 +44,201 @@ public class InputOutput {
         double phi = Math.atan2(b, a);
         System.out.println(r+"*(cos("+phi+")+sin("+phi+"))");
     }
+    public static Matrix CreateMatrix(){
+        int m = 0;
+        int n = 0;
+        boolean IsBreak = false;
+        Matrix new_matrix = new Matrix(m, n);
+        try {
+            m = sc.nextInt();
+            n = sc.nextInt();
+        } catch (java.util.InputMismatchException e){
+            System.out.println("You can set the sizes only by numbers");
+            sc = new Scanner(System.in);
+            IsBreak = true;
+        }
+        if (m < 0 || n < 0 || IsBreak){
+            System.out.println("Wrong sizes");
+            IsBreak = true;
+        }
+        if (!IsBreak){
+            try {
+                new_matrix = new Matrix(m, n);
+                new_matrix.SetCountOfRows(m);
+                new_matrix.SetCountOfColumns(n);
+            } catch (Exception e){
+                System.out.println("Error");
+            }
+        }
+        return new_matrix;
+    }
+    public static Complex[][] FillMatrix(Matrix matrix){
+        Complex[][] matrix_elem = matrix.GetMatrix();
+        int m = matrix.GetCountOfRows();
+        int n = matrix.GetCountOfColumns();
+        System.out.println("Enter the elements of the matrix number by number. Enter first the real part of a complex number, then the imaginary part, separating them with a comma. If one of the parts is missing, write 0 instead.\nExample: 1.2,3.78");
+        for (int i = 0; i < m; i++){
+            for (int j = 0; j < n; j++){
+                System.out.format("Enter matrix[%d][%d]: ", i, j);
+                try {
+                    matrix_elem[i][j] = InputAndCreateComplex();
+                } catch (Exception e){
+                    System.out.println("Invalid input. Try again");
+                    //
+                }
+            }
+        }
+        return matrix_elem;
+    }
+    public static void PrintMatrix(Complex[][] matrix, int n){
+        System.out.println("Matrix:");
+        for (Complex[] row: matrix){
+            for (int j = 0; j < n; j++){
+                if (row[j] == null){
+                    System.out.print(0.0+"+"+0.0+"i  ");
+                } else{
+                    PrintComplex(row[j]);
+                    System.out.print("  ");
+                }
+            }
+            System.out.println("");
+        }
+    }
     /**
      *Method to work with user commands
      */
     public static boolean Functions() {
-        int func = sc.nextInt();
+        int func = 0;
+        try {
+            func = sc.nextInt();
+        } catch (java.util.InputMismatchException e){
+            System.out.println("Enter the command NUMBER");
+            sc = new Scanner(System.in);
+            func = sc.nextInt();
+        }
         Complex complex1 = new Complex();
         Complex complex2 = new Complex();
         Complex result;
-        boolean Break; // false - program works, true - program is broken
+        Matrix new_matrix;
+        boolean IsBreak; // false - program works, true - program is broken
         switch (func){
             case 1:
                 System.out.println("1 - print this menu;\n2 - create a complex number;\n3 - add two complex numbers;\n4 - subtract the second complex number from the first complex number;\n5 - multiply two complex numbers;\n6 - print a complex number in trigonometric form;\n7 - create a matrix;\n8 - set matrix elements;\n9 - add two matrices;\n10 - multiply two matrices;\n11 - matrix transposition;\n12 - calculate the determinant of the matrix;\n13 - finish the program");
                 break;
             case 2:
                 try {
+                    System.out.print("Enter first the real part of a complex number, then the imaginary part, separating them with a comma. If one of the parts is missing, write 0 instead.\nExample: 1.2,3.78\nEnter: ");
                     Complex complex = InputAndCreateComplex();
-                    System.out.print("\nComplex number created: ");
+                    System.out.print("Complex number created: ");
                     PrintComplex(complex);
+                    System.out.println("");
                 } catch (Exception e){
                     System.out.println("Invalid input");
                 }
-                System.out.println("\nEnter the number of what you want to do. Enter 1 to view the list of functions");
+                System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 3:
-                Break = false;
+                IsBreak = false;
                 try {
-                    System.out.println("Enter the first complex number:");
+                    System.out.print("Enter the first complex number:\nEnter first the real part of a complex number, then the imaginary part, separating them with a comma. If one of the parts is missing, write 0 instead.\nExample: 1.2,3.78\nEnter: ");
                     complex1 = InputAndCreateComplex();
-                    System.out.println("\nEnter the second complex number:");
+                    System.out.print("\nEnter the second complex number:\nEnter first the real part of a complex number, then the imaginary part, separating them with a comma. If one of the parts is missing, write 0 instead.\nExample: 1.2,3.78\nEnter: ");
                     complex2 = InputAndCreateComplex();
                 } catch (Exception e){
                     System.out.println("Invalid input");
-                    Break = true;
+                    IsBreak = true;
                 }
-                if (!Break) {
+                if (!IsBreak) {
                     result = Complex.Add(complex1, complex2);
                     System.out.print("\nResult: ");
                     PrintComplex(result);
+                    System.out.println("");
                 }
-                System.out.println("\nEnter the number of what you want to do. Enter 1 to view the list of functions");
+                System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 4:
-                Break = false;
+                IsBreak = false;
                 try {
-                    System.out.println("Enter the first complex number - minuend:");
+                    System.out.print("Enter the first complex number - minuend:\nEnter first the real part of a complex number, then the imaginary part, separating them with a comma. If one of the parts is missing, write 0 instead.\nExample: 1.2,3.78\nEnter: ");
                     complex1 = InputAndCreateComplex();
-                    System.out.println("\nEnter the second complex number - subtrahend:");
+                    System.out.print("\nEnter the second complex number - subtrahend:\nEnter first the real part of a complex number, then the imaginary part, separating them with a comma. If one of the parts is missing, write 0 instead.\nExample: 1.2,3.78\nEnter: ");
                     complex2 = InputAndCreateComplex();
                 } catch (Exception e){
                     System.out.println("Invalid input");
-                    Break = true;
+                    IsBreak = true;
                 }
-                if (!Break) {
+                if (!IsBreak) {
                     result = Complex.Subtract(complex1, complex2);
                     System.out.print("\nResult: ");
                     PrintComplex(result);
+                    System.out.println("");
                 }
-                System.out.println("\nEnter the number of what you want to do. Enter 1 to view the list of functions");
+                System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 5:
-                Break = false;
+                IsBreak = false;
                 try {
-                    System.out.println("Enter the first complex number:");
+                    System.out.print("Enter the first complex number:\nEnter first the real part of a complex number, then the imaginary part, separating them with a comma. If one of the parts is missing, write 0 instead.\nExample: 1.2,3.78\nEnter: ");
                     complex1 = InputAndCreateComplex();
-                    System.out.println("\nEnter the second complex number:");
+                    System.out.print("\nEnter the second complex number:\nEnter first the real part of a complex number, then the imaginary part, separating them with a comma. If one of the parts is missing, write 0 instead.\nExample: 1.2,3.78\nEnter: ");
                     complex2 = InputAndCreateComplex();
                 } catch (Exception e){
                     System.out.println("Invalid input");
-                    Break = true;
+                    IsBreak = true;
                 }
-                if (!Break) {
+                if (!IsBreak) {
                     result = Complex.Multiply(complex1, complex2);
                     System.out.print("\nResult: ");
                     PrintComplex(result);
+                    System.out.println("");
                 }
-                System.out.println("\nEnter the number of what you want to do. Enter 1 to view the list of functions");
+                System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 6:
                 try {
+                    System.out.print("Enter first the real part of a complex number, then the imaginary part, separating them with a comma. If one of the parts is missing, write 0 instead.\nExample: 1.2,3.78\nEnter: ");
                     Complex complex = InputAndCreateComplex();
                     System.out.print("\nTrigonometric form: ");
                     PrintTrigComplex(complex);
                 } catch (Exception e){
                     System.out.println("Invalid input");
                 }
-                System.out.println("\nEnter the number of what you want to do. Enter 1 to view the list of functions");
+                System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 7:
-                //
-                System.out.println("\nEnter the number of what you want to do. Enter 1 to view the list of functions");
+                System.out.print("Enter the sizes of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
+                new_matrix = CreateMatrix();
+                System.out.println("Matrix created");
+                PrintMatrix(new_matrix.GetMatrix(), new_matrix.GetCountOfColumns());
+                System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 8:
-                //
-                System.out.println("\nEnter the number of what you want to do. Enter 1 to view the list of functions");
+                System.out.print("Enter the sizes of the matrix as M N, separating them with a space or a new line. M - rows, N - columns. Example: 2 5\nEnter: ");
+                new_matrix = CreateMatrix();
+                Complex[][] matrix_elements = FillMatrix(new_matrix);
+                PrintMatrix(matrix_elements, new_matrix.GetCountOfColumns());
+                System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 9:
                 //
-                System.out.println("\nEnter the number of what you want to do. Enter 1 to view the list of functions");
+                System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 10:
                 //
-                System.out.println("\nEnter the number of what you want to do. Enter 1 to view the list of functions");
+                System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 11:
                 //
-                System.out.println("\nEnter the number of what you want to do. Enter 1 to view the list of functions");
+                System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 12:
                 //
-                System.out.println("\nEnter the number of what you want to do. Enter 1 to view the list of functions");
+                System.out.println("\nEnter the number of the function you want to do. Enter 1 to view the list of functions");
                 break;
             case 13:
                 return false;
             default:
-                System.out.println("Invalid command\nEnter the right number of what you want to do. Enter 1 to view the list of functions");
+                System.out.println("Non-existent command\nEnter the right number of the function you want to do. Enter 1 to view the list of functions");
         }
     return true;
     }
