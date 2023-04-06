@@ -7,6 +7,7 @@ public class Matrix {
      * matrix - a matrix with complex values
      */
     private final Complex[][] matrix;
+
     /**
      * rows - count of rows of the matrix
      * columns - count of columns of the matrix
@@ -49,6 +50,7 @@ public class Matrix {
     public void SetCountOfColumns(int columns){
         this.columns = columns;
     }
+
     /**
      * Getter of matrix array
      * @return matrix array
@@ -74,18 +76,44 @@ public class Matrix {
     }
 
     /**
-     * Method to add two matrices
-     * @param matrix1 - first matrix
-     * @param matrix2 - second matrix
-     * @param m - count of rows of the resulting matrix
-     * @param n - count of columns of the resulting matrix
-     * @return result of adding two matrices
+     * Method to get matrix elements from the user and fill the matrix with these elements
      */
-    public static Complex[][] AddMatrices(Complex[][] matrix1, Complex[][] matrix2, int m, int n){
-        Complex[][] result = new Complex[m][n];
+    public void FillMatrix(){
+        int m = this.GetCountOfRows();
+        int n = this.GetCountOfColumns();
+        System.out.println("Enter the elements of the matrix number by number. Enter first the real part of a complex number, then the imaginary part, separating them with a comma. If one of the parts is missing, write 0 instead.\nExample: 1.2,3.78");
         for (int i = 0; i < m; i++){
             for (int j = 0; j < n; j++){
-                result[i][j] = Complex.Add(matrix1[i][j], matrix2[i][j]);
+                System.out.format("Enter matrix[%d][%d]: ", i, j);
+                try {
+                    matrix[i][j] = InputOutput.InputAndCreateComplex();
+                } catch (Exception e){
+                    System.out.println("Invalid input. Try again");
+                    if (i == 0 && j == 0){
+                        j--;
+                    } else if (j == 0){
+                        j = n - 1;
+                        i--;
+                    } else{
+                        j--;
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Method to add two matrices
+     * @param matrix2 - matrix to be added to this matrix
+     * @return result of adding two matrices
+     */
+    public Matrix AddMatrices(Matrix matrix2){
+        int m = this.GetCountOfRows();
+        int n = this.GetCountOfColumns();
+        Matrix result = new Matrix(m, n);
+        for (int i = 0; i < m; i++){
+            for (int j = 0; j < n; j++){
+                result.GetMatrix()[i][j] = this.matrix[i][j].Add(matrix2.GetMatrix()[i][j]);
             }
         }
         return result;
@@ -93,21 +121,20 @@ public class Matrix {
 
     /**
      * Method to multiply two matrices
-     * @param matrix1 - first matrix
-     * @param matrix2 - second matrix
+     * @param matrix2 - matrix to be multiplied by this matrix
      * @param m - count of rows of the resulting matrix
      * @param n - count of columns of the resulting matrix
      * @param l - count of columns of the first matrix
      * @return result of multiplying two matrices
      */
-    public static Complex[][] MultiplyMatrices(Complex[][] matrix1, Complex[][] matrix2, int m, int n, int l){
-        Complex[][] result = new Complex[m][n];
+    public Matrix MultiplyMatrices(Matrix matrix2, int m, int n, int l){
+        Matrix result = new Matrix(m, n);
         for (int i = 0; i < m; i++){
             for (int j = 0; j < n; j++){
                 Complex summa = new Complex();
                 for (int k = 0; k < l; k++){
-                    summa = Complex.Add(summa, Complex.Multiply(matrix1[i][k], matrix2[k][j]));
-                    result[i][j] = summa;
+                    summa = summa.Add((this.matrix[i][k]).Multiply(matrix2.GetMatrix()[k][j]));
+                    result.GetMatrix()[i][j] = summa;
                 }
             }
         }
